@@ -1,24 +1,424 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
+
 <html>
+
+<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic' rel='stylesheet' type='text/css'>
 <head>
-  <meta charset="UTF-8">
-  <title>Resultados da Dissertação</title>
+    <title>Gaussian Embbeds and Masks</title>
+    <meta property="og:description" content="Neural Implicit Surface Evolution"/>
+    <meta property="og:image" itemprop="image" content="https://dsilvavinicius.github.io/nise/assets/representative.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='styles.css'/>
+
+    <!--meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@dsilvavinicius">
+    <meta name="twitter:title" content="Neural Implicit Surface Evolution">
+    <meta name="twitter:description" content="A new paper which uses differential equations to introduce a time dimension for Neural Implicits, allowing animation.">
+    <meta name="twitter:image" content="https://dsilvavinicius.github.io/nise/assets/representative.jpg"-->
 </head>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 <body>
-  <h1>Resultados Experimentais</h1>
-  <p>Este site apresenta os vídeos e métricas obtidos durante os testes com Gaussian Splatting com masks e appearance embeddings.</p>
+<div class="container">
+    <div class="paper-title">
+        <h1>Gaussian Embbeds and Masks</h1>
+    </div>
 
-  <h2>Vídeo de Exemplo</h2>
-  <video width="640" controls>
-    <source src="video1.mp4" type="video/mp4">
-    Seu navegador não suporta o vídeo.
-  </video>
+    <div id="authors">
+        <div class="author-row">
+            <div class="col-3 text-center"><a href="https://mteixeiratecgraf.github.io">Marco Teixeira</a><sup>1</sup></div>
+            <div class="col-3 text-center"><a href="https://dsilvavinicius.github.io">Vinícius da Silva</a><sup>1</sup></div>
+            <div class="col-3 text-center"><a href="http://www.inf.puc-rio.br/~lopes">Alberto Raposo</a><sup>1</sup></div>
+        </div>
+        <!--div class="author-row">
+            <div class="col-3 text-center"><a href="https://schardong.github.io">Guilherme Schardong</a><sup>3</sup></div>
+            <div class="col-3 text-center"><a href="https://www.lschirmer.com/">Luiz Schirmer</a><sup>4</sup></div>
+            <div class="col-3 text-center"><a href="https://lvelho.impa.br">Luiz Velho</a><sup>1</sup></div>
+        </div-->
 
-  <h2>Métricas</h2>
-  <ul>
-    <li>SSIM: 0.912</li>
-    <li>PSNR: 27.8 dB</li>
-    <li>LPIPS: 0.14</li>
-  </ul>
+        <div class="affil-row">
+            <div class="col-4 text-center"><sup>1</sup>PUC-Rio</div>
+            <div class="col-4 text-center"><sup>2</sup>IMPA</div>
+        </div>
+
+        <div style="clear: both">
+            <div class="paper-btn-parent">
+                <a class="paper-btn" href="https://visgraf.impa.br/papers/i4d-iccv2023-reb.pdf">
+                    <span class="material-icons"> description </span>
+                    Paper and supplementary
+                </a>
+                <a class="paper-btn" href="https://youtu.be/8NqwLkhaRBU">
+                    <span class="material-icons"> videocam </span>
+                    Video
+                </a>
+                <!--a class="paper-btn" href="https://github.com/dsilvavinicius/nise">
+                    <span class="material-icons"> code </span>
+                    Code
+                </a-->
+            </div>
+        </div>
+    </div>
+
+        <!-- <div style="clear: both"> -->
+        <!--     <div class="paper-btn-parent"> -->
+        <!--         <a class="paper-btn" href="https://visgraf.impa.br/papers/i4d-iccv2023-reb.pdf"> -->
+        <!--             <span class="material-icons"> description </span> -->
+        <!--             Paper, supplementary -->
+        <!--         </a> -->
+        <!--         <a class="paper-btn" href="https://youtu.be/8NqwLkhaRBU"> -->
+        <!--             <span class="material-icons"> videocam </span> -->
+        <!--             Video -->
+        <!--         </a> -->
+        <!--         <a class="paper-btn" href="https://dsilvavinicius.github.io/nise"> -->
+        <!--             <span class="material-icons"> code </span> -->
+        <!--             Code (Soon) -->
+        <!--         </a> -->
+        <!--     </div> -->
+        <!-- </div> -->
+    </div>
+
+    <section id="teaser-videos">
+        <!--
+        <figure style="width: 33%; float: left">
+            <p class="caption_bold">
+                Coarse
+            </p>
+        </figure>
+
+        <figure style="width: 33%; float: left">
+            <p class="caption_bold">
+                Neural Implicit Normal Mapping
+            </p>
+        </figure>
+
+        <figure style="width: 33%; float: left">
+            <p class="caption_bold">
+                Baseline
+            </p>
+        </figure>
+        -->
+
+        <img style="width: 100%; float: left" src="assets/truckCombination.gif"/>
+        <!--figure style="width: 100%; float: left">
+            <video class="centered" width="100%" autoplay muted loop playsinline>
+                <source src="assets/teaser_720.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </figure-->
+
+        <figure style="width: 100%; float: left">
+            <p class="caption_justify">
+                Neural implicit surface evolutions using our method: interpolation between implicit surfaces,
+                deformation driven by vector fields, and smoothing using the mean curvature equation.
+            </p>
+        </figure>
+
+        <img style="width: 50%; float: left" src="assets/compare_mic_0.gif"/><img style="width: 50%; float: left" src="assets/compare_chair_0.gif"/>
+        <figure style="width: 100%; float: left">
+            <p class="caption_justify">
+                Neural implicit surface evolutions using our method: interpolation between implicit surfaces,
+                deformation driven by vector fields, and smoothing using the mean curvature equation.
+            </p>
+        </figure>
+    </section>
+
+    <section id="news">
+        <h2>News</h2>
+        <hr>
+        <div class="row">
+            <div><span class="material-icons"> description </span> [Oct 2nd 2023] Code available.
+            <div><span class="material-icons"> description </span> [Jul 14th 2023] Paper accepted to #ICCV23.
+            <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">📢New ICCV Paper: Neural Surface Evolution!📢<br>Do you want to evolve your implicit surface using the Level Set equation without any supervision at the boundary conditions or using discretized methods such as FEM? Follow the 🧵 (rendering powered by <a href="https://twitter.com/nvidiaomniverse?ref_src=twsrc%5Etfw">@nvidiaomniverse</a>). <a href="https://t.co/sofIf7pqpI">pic.twitter.com/sofIf7pqpI</a></p>&mdash; Vinícius da Silva (@dsilvavinicius) <a href="https://twitter.com/dsilvavinicius/status/1679991981718609925?ref_src=twsrc%5Etfw">July 14, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+            <div><span class="material-icons"> description </span> [Jul 20th 2023] Page online.</div>
+        </div>
+    </section>
+
+    <section id="abstract"/>
+        <h2>Abstract</h2>
+        <hr>
+        <p>
+            This work explores the use of Gaussian Splatting techniques for neural rendering in uncontrolled environments, incorporating appearance embeddings and occlusion masks to enhance robustness.
+            We propose an extended pipeline that integrates semantic segmentation—leveraging foundation models such as Segment Anything—to identify and suppress occluded regions, thereby improving visual consistency across views.
+
+            Appearance embeddings are learned to guide view-dependent effects and sharpen the correspondence between images under complex lighting and occlusions.
+            Our approach demonstrates improved stability and visual quality in multi-view synthesis tasks, particularly in real-world scenes with background clutter and partial visibility.
+
+            Experiments show that combining masks with appearance cues leads to more coherent reconstructions and faster convergence, especially in comparison with baseline splatting methods.
+
+
+        </p>
+    </section>
+
+    <section id="overview"/>
+        <h2>Overview</h2>
+        <hr>
+
+<p>
+Let
+<span style="font-family: 'Cambria Math', serif;">\( \mathcal{G} = \{ \mathcal{P}_i \}_{i=1}^N \)</span>
+be a set of 3D Gaussians encoding the geometry and appearance of a scene.
+</p>
+
+<p>
+This work explores strategies to enhance <b>Gaussian Splatting</b> in uncontrolled environments by integrating <i>appearance embeddings</i> and <i>semantic segmentation masks</i>. We focus on increasing rendering robustness by filtering dynamic content, background noise, and occlusions often present in real-world captures.
+</p>
+
+<p>To this end, we introduce:</p>
+
+<ul>
+  <li>
+    An <b>occlusion-aware filtering pipeline</b>, leveraging foundation models such as <b>Segment Anything (SAM)</b> to generate instance-aware masks that identify and discard occluded regions during training.
+  </li>
+  <li>
+    A <b>latent appearance embedding</b> associated with each Gaussian, enabling better view-dependent effects and improved visual consistency across viewpoints.
+  </li>
+  <li>
+    A loss function that jointly optimizes segmentation-aware color consistency. It is defined as:
+    <br><br>
+    <span style="font-family: '  ', serif;">
+    \( \mathcal{L} = \frac{1}{N} \min_{\theta \in \Theta} \sum_i \mathcal{L}_c(x_i, \mathcal{G}(S, C_{\theta_i})) \)
+    </span>
+    <br><br>
+    where \( \mathcal{L}_c \) measures the image-space difference between the reference views \( x_i \) and the splatted renderings conditioned on segmentation masks \( S \) and appearance embeddings \( C_{\theta_i} \).
+  </li>
+</ul>
+
+<p>
+Each 3D Gaussian \( \mathcal{P}_i \) is parameterized by:
+</p>
+
+<ul>
+  <li><b>Position</b>: \( \mu_i \in \mathbb{R}^3 \)</li>
+  <li><b>Covariance matrix</b>: \( \Sigma_i \), defining shape and orientation</li>
+  <li><b>Color/Appearance embedding</b>: \( C_{\theta_i} \in \mathbb{R}^d \), modulated by view direction</li>
+  <li><b>Opacity and scale</b>: controlling blending and visibility in splatting</li>
+</ul>
+
+<p>
+The pipeline leverages semantic priors and latent guidance to improve training convergence and visual quality in cluttered, occluded environments.
+</p>
+
+<p>
+Quantitative results on real-world datasets demonstrate consistent improvements over baseline splatting approaches, with gains in <b>PSNR</b>, <b>SSIM</b>, and <b>LPIPS</b>.
+</p>
+
+
+        <p>
+        Let \(g:R^3\rightarrow R\) be a <i>neural implicit function</i> (coord-based neural network)
+        approximating the signed distance function of a given surface \(S\).
+        <br>
+        <br>
+        This work investigates the extension of the domain of \(g\) to the <i>space-time</i> \(R^3\times R\),
+        encoding the evolution of \(g\) as a higher-dimensional function \(f:R^3\times R \to R\).
+        The resulting animation is governed by the <i>level set equation</i> (LSE)
+        \(\frac{\partial f}{\partial t}=v|{\nabla f}|\),
+        which encodes the propagation of the level sets \(S_t\) of \(f(\cdot, t)\) towards their normals with speed \(v\).
+        The choice of the function \(v\) depends on the underlying geometric model.
+
+        <br>
+        <br>
+
+        We propose representing this implicit evolution by a (coord-based) neural network \(f_\theta:R^3\times R\to R\)
+        and define the following loss functional to train \(f_\theta\) to approximate a solution to the LSE problem:
+        <br>
+        <p font-size="12px">
+        \(L(\theta)\!=\!\!\!\!\!
+        \int\limits_{R^3\times {0}}\!\!\!\left(f_\theta\!-\!g\right)^2 dx+\!\!\!\!\!\!\!
+        \int\limits_{R^3\times (a,b)}\!\!\!\!\!\!\big(\frac{\partial f_\theta}{\partial t}\!-\!v|{\nabla f_\theta}|\big)^2 dx dt\).
+        </p>
+
+        <br>
+        <br>
+        We present three examples of neural implicit evolution using the LSE.
+        For this, we only need to define the function \(v\) for each example:
+        <br>
+        <ul>
+            <li>
+            First, we consider moving the surface \(S\) towards a vector field \(V:R^3\to R^3\),
+            in this case, \(v=\langle V,N\rangle\), where \(N\) is the normal field.
+            </li>
+            <li>
+            Second, we move \(S\) by the mean curvature equation which is expressed as a LSE with \(v=div (N)\).
+            </li>
+            <li>
+            Finally, we deform \(g\) into a second function \(h\) using a LSE with \(v=-(h-f)\).
+            </li>
+        </ul>
+        </p>
+    </section>
+
+    <section id="results">
+        <h2>Results</h2>
+        <hr>
+
+        <div>
+            <div class="col-2 text-center">
+                <h3>Vector Field: Bob</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/bob_vector_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+
+            <div class="col-2 text-center">
+                <h3>Vector Field: Spot</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/spot_vector_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+        </div>
+
+        <div>
+            <div class="col-2 text-center">
+                <h3>Smoothing: Bunny</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/bunny_curvature_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+
+            <div class="col-2 text-center">
+                <h3>Smoothing: Dumbbell</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/dumbbell_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+        </div>
+
+        <div>
+            <div class="col-2 text-center">
+                <h3>Interpolation: Torus -> Bob</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/bob_torus_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+
+            <div class="col-2 text-center">
+                <h3>Interpolation: Spot -> Bob</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/spot_bob_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+        </div>
+
+        <div>
+            <div class="col-2 text-center">
+                <h3>Interpolation: Spot -> Bob</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/spot_torus_up_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+
+            <div class="col-2 text-center">
+                <h3>Interpolation: Falcon -> Witch</h3>
+                <hr>
+
+                <figure>
+                    <video class="centered" width="100%" autoplay muted loop playsinline>
+                        <source src="assets/falcon_witch_720.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section id="paper">
+        <h2>Paper</h2>
+        <hr>
+        <div class="flex-row">
+            <div style="box-sizing: border-box; padding: 16px; margin: auto;">
+                <a href="https://visgraf.impa.br/papers/i4d-iccv2023-reb.pdf"><img class="screenshot" src="assets/paper-thumbnail.png"></a>
+            </div>
+            <div style="width: 60%">
+                <p><b>Neural Implicit Surface Evolution</b></p>
+                <p>Tiago Novello, Vinícius da Silva, Guilherme Schardong, Luiz Schirmer, Hélio Lopes and Luiz Velho</p>
+
+                <div><span class="material-icons"> description </span><a href="https://visgraf.impa.br/papers/i4d-iccv2023-reb.pdf"> Paper preprint (PDF)</a></div>
+                <!--<div><span class="material-icons"> description </span><a href="https://arxiv.org/abs/2201.09636"> arXiv version</a></div>-->
+                <div><span class="material-icons"> insert_comment </span><a href="assets/novello2023neural.bib"> BibTeX</a></div>
+                <div><span class="material-icons"> videocam </span><a href="https://youtu.be/8NqwLkhaRBU"> Video</a></div>
+
+                <p>Please send feedback and questions to <a href="https://sites.google.com/site/tiagonovellodebrito">Tiago Novello</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="bibtex">
+        <h2>Citation</h2>
+        <hr>
+        <pre style="background-color:#121212;"><code>@InProceedings{Novello_2023_ICCV,
+    author = {Novello, Tiago and da Silva, Vin\'icius and Schardong, Guilherme and Schirmer, Luiz and
+            Lopes, H\'elio and Velho, Luiz},
+    title = {Neural Implicit Surface Evolution},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month = {October},
+    year = {2023},
+    url = {https://openaccess.thecvf.com/content/ICCV2023/html/Novello_Neural_Implicit_Surface_Evolution_ICCV_2023_paper.html},
+    pages = {14279-14289}
+}
+</code></pre>
+    </section>
+
+    <section id="acknowledgements">
+        <h2>Acknowledgements</h2>
+        <hr>
+        <div class="row">
+            <p>
+            We would like to thank
+            <a href="https://tovacinni.github.io">Towaki Takikawa</a>,
+            <a href="https://joeylitalien.github.io">Joey Litalien</a>,
+            <a href="https://kangxue.org/">Kangxue Yin</a>,
+            <a href="https://scholar.google.de/citations?user=rFd-DiAAAAAJ">Karsten Kreis</a>,
+            <a href="https://research.nvidia.com/person/charles-loop">Charles Loop</a>,
+            <a href="http://www.cim.mcgill.ca/~derek/">Derek Nowrouzezahrai</a>,
+            <a href="https://www.cs.toronto.edu/~jacobson/">Alec Jacobson</a>,
+            <a href="https://casual-effects.com/">Morgan McGuire</a> and
+            <a href="https://www.cs.toronto.edu/~fidler/">Sanja Fidler</a>
+            for licensing the code of the paper <a href="https://nv-tlabs.github.io/nglod/">Neural Geometric Level of Detail:
+                Real-time Rendering with Implicit 3D Surfaces</a> and project page under the <a href=https://opensource.org/licenses/MIT>MIT License</a>. This website is based on that page.
+            <br/>
+            <br/>
+            <em>We also thank the <a href="https://graphics.stanford.edu">Stanford Computer Graphics Laboratory</a> for the Bunny, Dragon, Armadillo, and Happy Buddha, acquired through the <a href="http://graphics.stanford.edu/data/3Dscanrep/">Stanford 3D scan repository</a>. Finally, we thank <a href="https://www.cs.cmu.edu/~kmcrane/Projects/ModelRepository/">Keenan Crane</a> for the Spot and Bob models.
+            </p>
+        </div>
+    </section>
+</div>
 </body>
+
 </html>
