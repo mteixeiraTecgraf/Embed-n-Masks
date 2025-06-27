@@ -98,10 +98,27 @@
                 Baseline
             </p>
         </figure>
+
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\ours.mp4 -vf scale=iw/2:ih/2 -b:v 1M -c:a copy docs\assets\ours_low.mp4
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\ours_50000_0.gif -vf "scale=iw:ih" -r 40 docs\assets\ours_50000_0_low.gif
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\ours_50000_7.gif -vf "scale=iw/2:ih/2" -r 10 docs\assets\ours_50000_7_low.gif
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\truckCombination.gif -vf "scale=iw/2:ih/2" -r 10 docs\assets\truckCombination_low.gif
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\compare_legob_0.gif -vf "scale=iw/2:ih/2" -r 10 docs\assets\compare_legob_0_low.gif
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\compare_chair_0.gif -vf "scale=iw/2:ih/2" -r 10 docs\assets\compare_chair_0_low.gif
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\compare_mic_0.gif -vf "scale=iw/2:ih/2" -r 10 docs\assets\compare_mic_0low.gif
+
+docs\assets\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg -i docs\assets\compare_mic_0.gif -movflags faststart -pix_fmt yuv420p docs\assets\compare_mic_0.mp4
         -->
 
+        <figure style="width: 100%; float: left">
+            <video class="centered" width="100%" autoplay muted loop playsinline>
+                <source src="assets/truckCombination.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </figure>
+        <!--
         <img style="width: 100%; float: left" src="assets/truckCombination.gif"/>
-        <!--figure style="width: 100%; float: left">
+        figure style="width: 100%; float: left">
             <video class="centered" width="100%" autoplay muted loop playsinline>
                 <source src="assets/teaser_720.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -110,16 +127,31 @@
 
         <figure style="width: 100%; float: left">
             <p class="caption_justify">
-                Neural implicit surface evolutions using our method: interpolation between implicit surfaces,
-                deformation driven by vector fields, and smoothing using the mean curvature equation.
+                Comparison between 3DGS and our occlusion-aware method on the Truck scene.
+                Foreground occlusions in 3DGS cause distortions and loss of detail.
+                Our approach filters them out, producing a cleaner and sharper reconstruction.
+
+
             </p>
         </figure>
-
-        <img style="width: 50%; float: left" src="assets/compare_mic_0.gif"/><img style="width: 50%; float: left" src="assets/compare_chair_0.gif"/>
+        <figure style="width: 50%; float: left">
+            <video class="centered" width="100%" autoplay muted loop playsinline>
+                <source src="assets/compare_mic_0.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </figure>
+        <figure style="width: 50%; float: left">
+            <video class="centered" width="100%" autoplay muted loop playsinline>
+                <source src="assets/compare_chair_0.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </figure>
+        <!--img style="width: 50%; float: left" src="assets/compare_mic_0.gif"/><img style="width: 50%; float: left" src="assets/compare_chair_0.gif"/-->
         <figure style="width: 100%; float: left">
             <p class="caption_justify">
-                Neural implicit surface evolutions using our method: interpolation between implicit surfaces,
-                deformation driven by vector fields, and smoothing using the mean curvature equation.
+                Side-by-side comparison between 3DGS and our method on Chair and Mic scenes.
+                Dynamic foreground elements degrade 3DGS reconstructions with ghosting and blur.
+                Our model handles occlusions better, preserving structure and visual clarity.
             </p>
         </figure>
     </section>
@@ -236,7 +268,7 @@
 
                 <figure>
                     <video class="centered" width="100%" autoplay muted loop playsinline>
-                        <source src="assets/ours2.mp4" type="video/mp4">
+                        <source src="assets/ours2_low.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </figure>
@@ -249,7 +281,7 @@
 
                 <figure>
                     <video class="centered" width="100%" autoplay muted loop playsinline>
-                        <source src="assets/ours.mp4" type="video/mp4">
+                        <source src="assets/ours_low.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </figure>
@@ -261,27 +293,24 @@
                 <h3>Mic: Original Appearance</h3>
                 <hr>
 
-                <img style="width: 100%; float: left" src="assets/ours_50000_0.gif"/>
-
-                <!--figure>
+                <figure>
                     <video class="centered" width="100%" autoplay muted loop playsinline>
-                        <source src="assets/bunny_curvature_720.mp4" type="video/mp4">
+                        <source src="assets/ours_50000_0.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                </figure-->
+                </figure>
             </div>
 
             <div class="col-2 text-center">
                 <h3>Mic: Original Appearance</h3>
                 <hr>
 
-                <img style="width: 100%; float: left" src="assets/ours_50000_7.gif"/>
-                <!--figure>
+                <figure>
                     <video class="centered" width="100%" autoplay muted loop playsinline>
-                        <source src="assets/dumbbell_720.mp4" type="video/mp4">
+                        <source src="assets/ours_50000_7.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                </figure-->
+                </figure>
             </div>
         </div>
     </section>
