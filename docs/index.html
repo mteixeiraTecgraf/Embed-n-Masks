@@ -153,58 +153,79 @@
         <hr>
 
         <p>
-Let
-<span style="font-family: 'Cambria Math', serif;">\( \mathcal{G} = \{ \mathcal{P}_i \}_{i=1}^N \)</span>
-be a set of 3D Gaussians encoding the geometry and appearance of a scene.
-</p>
+            The proposed method improves the robustness of <b>Gaussian Splatting</b> in real-world (in-the-wild) scenes by
+            combining semantic segmentation masks and appearance embeddings. The pipeline consists of three main stages: <b>Preparation</b>,
+            <b>Appearance Modeling</b>, and <b>Occlusion-Aware Rendering</b>.
+        </p>
 
-<p>
-This work explores strategies to enhance <b>Gaussian Splatting</b> in uncontrolled environments by integrating <i>appearance embeddings</i> and <i>semantic segmentation masks</i>. We focus on increasing rendering robustness by filtering dynamic content, background noise, and occlusions often present in real-world captures.
-</p>
 
-<p>To this end, we introduce:</p>
+        <p style="text-align: center;">
+            <img src="assets/arquitetura_v2.png" width="100%" alt="Pipeline diagram"
+                 style="border: 1px solid #333; border-radius: 8px; margin-top: 1em;">
+        </p>
 
-<ul>
-  <li>
-    An <b>occlusion-aware filtering pipeline</b>, leveraging foundation models such as <b>Segment Anything (SAM)</b> to generate instance-aware masks that identify and discard occluded regions during training.
-  </li>
-  <li>
-    A <b>latent appearance embedding</b> associated with each Gaussian, enabling better view-dependent effects and improved visual consistency across viewpoints.
-  </li>
-  <li>
-    A loss function that jointly optimizes segmentation-aware color consistency. It is defined as:
-    <br><br>
-    <span style="font-family: '  ', serif;">
-    \( \mathcal{L} = \frac{1}{N} \min_{\theta \in \Theta} \sum_i \mathcal{L}_c(x_i, \mathcal{G}(S, C_{\theta_i})) \)
-    </span>
-    <br><br>
-    where \( \mathcal{L}_c \) measures the image-space difference between the reference views \( x_i \) and the splatted renderings conditioned on segmentation masks \( S \) and appearance embeddings \( C_{\theta_i} \).
-  </li>
-</ul>
+        <h3>Preparation</h3>
+        <p>
+            Input images are processed using <b>SAM2</b> (Segment Anything v2), generating binary <i>semantic masks</i> that
+            highlight foreground objects and help isolate occluded regions. These masks are used both during training and
+            evaluation to condition the loss and filtering stages.
+        </p>
 
-<p>
-Each 3D Gaussian \( \mathcal{P}_i \) is parameterized by:
-</p>
+        <h3>Appearance</h3>
+        <p>
+            Each 3D Gaussian \( \mathcal{P}_i \) is defined by a position and orientation in space. Appearance modeling is
+            conditioned by:
+        </p>
 
-<ul>
-  <li><b>Position</b>: \( \mu_i \in \mathbb{R}^3 \)</li>
-  <li><b>Covariance matrix</b>: \( \Sigma_i \), defining shape and orientation</li>
-  <li><b>Color/Appearance embedding</b>: \( C_{\theta_i} \in \mathbb{R}^d \), modulated by view direction</li>
-  <li><b>Opacity and scale</b>: controlling blending and visibility in splatting</li>
-</ul>
+        <ul>
+            <li>
+                <b>Splat position encoding</b>: encoded as \( \gamma_x \) and used as input to a small MLP
+            </li>
+            <li>
+                <b>Learned appearance vector</b>: \( \varepsilon^{(a)}_i \), specific to each Gaussian
+            </li>
+            <li>
+                Both inputs are fused in a <b>view-dependent MLP</b> that predicts color for each splat
+            </li>
+        </ul>
 
-<p>
-The pipeline leverages semantic priors and latent guidance to improve training convergence and visual quality in cluttered, occluded environments.
-</p>
+        <h3>Occlusion-aware Rendering</h3>
+        <p>
+            The final rendered image is computed via standard Gaussian Splatting, but the loss is conditioned on the <b>semantic
+            masks</b> to ignore occluded or irrelevant regions. The rendering loss is defined as:
+        </p>
 
-<p>
-Quantitative results on real-world datasets demonstrate consistent improvements over baseline splatting approaches, with gains in <b>PSNR</b>, <b>SSIM</b>, and <b>LPIPS</b>.
-</p>
+        <p style="text-align: center;">
+            \( \mathcal{L} = \frac{1}{N} \min_{\theta \in \Theta} \sum_i \mathcal{L}_c(x_i, \mathcal{G}(S, C_{\theta_i})) \)
+        </p>
 
+        <p>
+            where \( x_i \) are input views, \( S \) the segmentation masks, and \( C_{\theta_i} \) the color predicted via
+            the appearance MLP. This formulation leads to better optimization by reducing the influence of background
+            clutter and occlusion.
+        </p>
+
+        <h3>Gaussian Attributes</h3>
+        <p>Each 3D Gaussian \( \mathcal{P}_i \) is parameterized by:</p>
+        <ul>
+            <li><b>Position</b>: \( \mu_i \in \mathbb{R}^3 \)</li>
+            <li><b>Covariance matrix</b>: \( \Sigma_i \in \mathbb{R}^{3 \times 3} \)</li>
+            <li><b>Opacity and scale</b>: influencing splatting and visibility</li>
+            <li><b>Appearance vector</b>: \( \varepsilon_i^{(a)} \in \mathbb{R}^d \), used for view-dependent color
+                prediction
+            </li>
+        </ul>
+
+        <!--h3>Results</h3>
+        <p>
+            The pipeline yields improved rendering quality in challenging scenarios, especially in scenes with partial
+            occlusion or moving subjects. Experiments report consistent gains in <b>PSNR</b>, <b>SSIM</b>, and <b>LPIPS</b>
+            over the baseline.
+        </p-->
 
     </section>
 
-    <section id="results">
+<section id="results">
         <h2>Results</h2>
         <hr>
 
